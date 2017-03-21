@@ -1,0 +1,28 @@
+Lvl 1: Indice de ficheiros com o respetivo dispositivo e possibilidade de o descarregar
+Lvl 2: Bookmarks, nosso Media player (1º pra audio, depois pra video, texto, etc...), zipping dos conteúdos
+Lvl 3: Queries avançadas aos dispositivos
+Lvl 4: Streaming, playlists, (sharing)
+Lvl 5: IMDB integration e tal e coise
+
+
+Servidor central cujo ip é sabido e onde os dispositivos se registam. Esse servidor guarda uma base de dados (ou lista ou wtv) dos ips de cada dispositivo para que aquando da altura de decarregar um ficheiro ou iniciar o streaming, se saiba como chegar ao dispositivo com o ficheiro. Esta base de dados pode também ser usada para manter um registo dos ficheiros e em que dispositivo se encontram, bem como um histórico dos marcadores (em percentagem) onde o utilizador deixou os ficheiros.  
+
+
+Hipóteses: 
+O servidor central guarda só os ips dos dispositivos e depois vai-se perguntar ao dispositivo os ficheiros que este tem
+vs
+O servidor guarda também uma lista de ficheiros dos dispositivos
+
+Contas de utilizador 
+vs 
+rambóia
+
+Opções de sharing
+vs
+Não cometer ilegalidades
+
+
+Tecnologias
+Django, Flask, Node, PHP e todas as associadas, Scalatra, Rails
+
+Angular, Angular2, electron, ionic, react
