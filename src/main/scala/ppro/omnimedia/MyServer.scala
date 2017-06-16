@@ -9,7 +9,6 @@ import scalaz.concurrent.Task
 import org.http4s.server.{Server, ServerApp}
 import org.http4s.server.blaze.BlazeBuilder
 import slick.jdbc.PostgresProfile.api._
-import io.circe._, io.circe.parser._
 
 
 object MyServer extends ServerApp {
@@ -25,11 +24,10 @@ object MyServer extends ServerApp {
   )
   database.run(setup)
 
-
   override def server(args: List[String]): Task[Server] =
     BlazeBuilder
       .bindHttp(port, ip)
-      .mountService(HelloWorld.service)
+      .mountService(UserService.service)
       .withServiceExecutor(pool)
       .start
 }

@@ -30,12 +30,10 @@ object User {
   private val users = TableQuery[User]
 
   private def hashPassword(password: String): String =
-      BCrypt.hashpw(password, BCrypt.gensalt(31))
-
+    BCrypt.hashpw(password, BCrypt.gensalt(31))
 
   def insertIfNotExists(email: String, password: String): Task[Boolean] = {
     val hash = hashPassword(password)
-
 
     val query = users += (1, email, hash)
     val future = MyServer.database.run(query) map {
@@ -49,7 +47,7 @@ object User {
   def authenticate(email: String, password: String): Task[Boolean] = {
     val query = users.filter(_.email === email).take(1)
     val result = MyServer.database.run(query.result).map({
-      case Seq((id, email, hash), rest @ _ *) => BCrypt.checkpw(password, hash)
+      case Seq((_, _, hash), _@_ *) => BCrypt.checkpw(password, hash)
     }).toTask
     result
   }
