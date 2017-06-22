@@ -1,0 +1,11 @@
+sbt run
+run
+exit
+run
+sbt build
+build
+run
+exit
+run
+import io.circe._
+import cats.syntax.either._ import io.circe._, io.circe.parser._ 

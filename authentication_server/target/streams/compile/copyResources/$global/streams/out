@@ -1,0 +1,5 @@
+[0m[[0mdebug[0m] [0mCopy resource mappings: [0m
+[0m[[0mdebug[0m] [0m	(C:\Users\joaof\omnimedia\src\main\resources\application.conf,C:\Users\joaof\omnimedia\target\scala-2.12\classes\application.conf)[0m
+[0m[[0mdebug[0m] [0m	(C:\Users\joaof\omnimedia\src\main\resources\logback.xml,C:\Users\joaof\omnimedia\target\scala-2.12\classes\logback.xml)[0m
+[0m[[0mdebug[0m] [0m	(C:\Users\joaof\omnimedia\src\main\resources\private,C:\Users\joaof\omnimedia\target\scala-2.12\classes\private)[0m
+[0m[[0mdebug[0m] [0m	(C:\Users\joaof\omnimedia\src\main\resources\public,C:\Users\joaof\omnimedia\target\scala-2.12\classes\public)[0m
