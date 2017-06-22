@@ -18,8 +18,12 @@ libraryDependencies ++= Seq(
   "io.circe" %% "circe-core" % circeVersion,
   "io.circe" %% "circe-generic" % circeVersion,
   "io.circe" %% "circe-parser" % circeVersion,
+  "io.circe" %% "circe-literal" % circeVersion,
   "com.roundeights" %% "hasher" % "1.2.0",
-  "io.verizon.delorean" %% "core" % "1.2.40-scalaz-7.2"
+  "io.verizon.delorean" %% "core" % "1.2.40-scalaz-7.2",
+  "com.pauldijou" %% "jwt-core" % "0.13.0",
+  "com.pauldijou" %% "jwt-circe" % "0.13.0"
+
 )
 
 resolvers ++= Seq("jBCrypt Repository" at "http://repo1.maven.org/maven2/org/")
