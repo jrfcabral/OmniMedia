@@ -1,0 +1,16 @@
+<div class="col-sm-4 col-sm-offset-4">
+    <div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">Login</h3>
+    </div>
+    <div class="panel-body">
+        <form>
+            <input name="email" [(ngModel)]="email" placeholder="Your email" type="text" required>
+            <br>
+            <input name="password" [(ngModel)]="password" placeholder="Password" type="password" required>
+            <br>
+            <button (click)="showData()" class="btn btn-danger">Login</button>
+        </form>
+    </div>
+    </div>
+</div>

@@ -1,0 +1,4 @@
+authentication_server/.idea/*
+authentication_server/project/target/*
+local_server/local_server/__pycache__/*
+
