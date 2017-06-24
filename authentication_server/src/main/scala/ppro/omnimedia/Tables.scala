@@ -48,6 +48,7 @@ object User {
     val query = users.filter(_.email === email).take(1)
     val result = MyServer.database.run(query.result).map({
       case Seq((_, _, hash), _@_ *) => BCrypt.checkpw(password, hash)
+      case _ => false
     }).toTask
     result
   }
