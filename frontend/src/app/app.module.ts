@@ -6,9 +6,11 @@ import { RouterModule, Routes } from '@angular/router';
 
 
 import { AppComponent } from './app.component';
-import { LoginComponent } from './login.component';
+import { LoginComponent } from './login/login.component';
+import { SettingsComponent } from './settings/settings.component';
+import { BrowserComponent } from './browser/browser.component';
 
-import { LoginService } from './login.service';
+import { LoginService } from './services/login.service';
 
 
 const appRoutes: Routes = [ 
@@ -16,6 +18,11 @@ const appRoutes: Routes = [
     path: 'login',
     component: LoginComponent,
     data: { title: 'Omnimedia: Login window' }
+  },
+  {
+    path: 'settings',
+    component: SettingsComponent,
+    data: { title: 'Omnimedia: Settings window' }
   },
   { path: '',
     redirectTo: "/login",
@@ -27,7 +34,9 @@ const appRoutes: Routes = [
 @NgModule({
   declarations: [
     AppComponent,
-    LoginComponent
+    LoginComponent,
+    SettingsComponent,
+    BrowserComponent
   ],
   imports: [
     BrowserModule,
