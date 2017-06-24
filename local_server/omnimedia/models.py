@@ -13,6 +13,6 @@ class MediaFolder(models.Model):
         ('MOV', 'Movie'),
         ('MUS', 'Music')
     )
-    path = models.CharField(max_length=1000, blank=False)
+    path = models.CharField(max_length=1000, blank=False, unique=True)
     media_type = models.CharField(max_length=3, choices=MEDIA_CHOICES, blank=False)
-    name = models.CharField(max_length=30, null=True, blank=False)
+    name = models.CharField(max_length=30, null=True, blank=False, unique=True)
