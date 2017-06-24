@@ -10,6 +10,7 @@ import { LoginComponent } from './login.component';
 
 import { LoginService } from './login.service';
 
+
 const appRoutes: Routes = [ 
    {
     path: 'login',

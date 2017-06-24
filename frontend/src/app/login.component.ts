@@ -12,10 +12,12 @@ export class LoginComponent {
     email: string;
     password: string;
 
-    constructor(ls: LoginService) {}
-
-    public showData(){
-        console.log(this.email)
-        console.log(this.password)
+    constructor(private ls: LoginService) {
+        ls.getAuthStatus().subscribe(success => console.log(ls.token));
     }
+
+    private login(): void {
+        this.ls.getToken(this.email, this.password);
+    }
+
 }
