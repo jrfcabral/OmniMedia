@@ -1,4 +1,5 @@
 authentication_server/.idea/*
+authentication_server/.idea/workspace.xml
 authentication_server/project/target/*
 local_server/local_server/__pycache__/*
 local_server/.idea/*
