@@ -1,3 +1,4 @@
+import { FileComponent } from './browser/file.component';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
@@ -42,7 +43,8 @@ const appRoutes: Routes = [
     AppComponent,
     LoginComponent,
     SettingsComponent,
-    BrowserComponent
+    BrowserComponent,
+    FileComponent
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,5 @@
+<li>{{file.name}} <span (click)="toggleExpand()" *ngIf="file.is_dir">expand</span>
+    <ul *ngIf="expanded">
+    <app-file *ngFor="let subfile of file.contents" [file]="subfile"></app-file>
+    </ul>
+</li>

@@ -1,13 +1,4 @@
 <p> Files list </p>
-
 <ul>
-    <li *ngFor="let file of files">
-        {{file.name}}
-        <span *ngIf="file.is_dir" (click)="toggleExpand()">expand</span>
-        <ul *ngIf="expand">
-            <li  *ngFor="let innerFile of file.contents">
-                {{innerFile.name}}
-            </li>
-        </ul>
-    </li>
+    <app-file *ngFor="let file of files" [file]="file">      </app-file>
 </ul>
