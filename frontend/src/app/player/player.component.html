@@ -1,0 +1,12 @@
+<h1>
+    Very good media player (TM)
+</h1>
+<div class="row">
+    {{selectedFile.name}}
+</div>
+<div class="row">
+    <div class="col-md-4 col-md-offset-4">
+        <button class="btn btn-default" *ngIf="playing" (click)="togglePlaying()">Stahp</button>
+        <button class="btn btn-default" *ngIf="!playing" (click)="togglePlaying()">Play</button>
+    </div>
+</div>
