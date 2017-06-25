@@ -4,7 +4,7 @@ import { FileService } from '../services/file.service';
 
 import { File } from '../interfaces/File';
 
-import { Observable } from 'Rxjs/Observable';
+import { Observable } from 'rxjs/Observable';
 
 @Component({
   selector: 'browser',
@@ -14,9 +14,14 @@ import { Observable } from 'Rxjs/Observable';
 export class BrowserComponent {
 
     files: Observable<File[]>;
+    expand: boolean = false;
 
     constructor(private fs: FileService) {
-      this.files = fs.getFolderFiles(1);
+      fs.getFolderFiles(2).subscribe(res => {this.files = res.json()});
+    }
+
+    private toggleExpand(){
+      this.expand = !this.expand;
     }
 
 }
