@@ -4,6 +4,8 @@ import { FileService } from '../services/file.service';
 
 import { File } from '../interfaces/File';
 
+import { Observable } from 'Rxjs/Observable';
+
 @Component({
   selector: 'browser',
   templateUrl: './browser.component.html',
@@ -11,14 +13,10 @@ import { File } from '../interfaces/File';
 })
 export class BrowserComponent {
 
-    files: File[];
+    files: Observable<File[]>;
 
     constructor(private fs: FileService) {
-      this.fs.getFiles().subscribe(success => {
-        this.files = this.fs.files;
-        console.log(this.fs.files);
-      })
-      this.fs.getFilesFromServer();
+      this.files = fs.getFolderFiles(1);
     }
 
 }

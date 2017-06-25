@@ -27,10 +27,10 @@ object UserService {
 
     case req@POST -> Root / "user" => {
       req.as(jsonOf[UserRequest]) flatMap {
-        case UserRequest(email, password) if email.validEmail => User.insertIfNotExists(email, password) map {
+        case UserRequest(email, password) if email.validEmail => User.insertIfNotExists(email, password) flatMap {
 
-          case true => new Response()
-          case false => new Response(status = Status.UnprocessableEntity)
+          case true =>  Ok()
+          case false => UnprocessableEntity()
 
         }
 

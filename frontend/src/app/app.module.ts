@@ -31,7 +31,7 @@ const appRoutes: Routes = [
     data: { title: 'Omnimedia: Browser window' }
   },
   { path: '',
-    redirectTo: "/login",
+    redirectTo: "/browser",
     pathMatch: 'full'
   },
 ];

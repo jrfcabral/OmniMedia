@@ -1,7 +1,5 @@
 <p> Files list </p>
 
 <ul>
-    <li *ngFor="let file of files | async">
-        {{file.name}}
-    </li>
+    {{files | async | json}}
 </ul>
