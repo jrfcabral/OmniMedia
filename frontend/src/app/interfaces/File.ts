@@ -1,3 +1,5 @@
 export interface File{
-    name: string
+    name: string,
+    is_dir: boolean,
+    contents?: File[]
 }

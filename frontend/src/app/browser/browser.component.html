@@ -1,7 +1,7 @@
 <p> Files list </p>
 
 <ul>
-    <li *ngFor="let file of files">
+    <li *ngFor="let file of files | async">
         {{file.name}}
     </li>
 </ul>

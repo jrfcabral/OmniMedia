@@ -33,7 +33,7 @@ class FileView(APIView):
         folder = MediaFolder.objects.get(id=folder_id)
         folder_path = folder.path
 
-        exploreDirectory(folder_path)
+        #exploreDirectory(folder_path)
         #serializer = FileInfoSerializer(files, many=True)
         #return Response(serializer.data)
         return Response(exploreDirectory(folder_path))

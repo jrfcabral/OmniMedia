@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 
+import { FileService } from '../services/file.service';
+
 import { File } from '../interfaces/File';
 
 @Component({
@@ -11,6 +13,12 @@ export class BrowserComponent {
 
     files: File[];
 
-    constructor() {}
+    constructor(private fs: FileService) {
+      this.fs.getFiles().subscribe(success => {
+        this.files = this.fs.files;
+        console.log(this.fs.files);
+      })
+      this.fs.getFilesFromServer();
+    }
 
 }

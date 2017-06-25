@@ -11,6 +11,7 @@ import { SettingsComponent } from './settings/settings.component';
 import { BrowserComponent } from './browser/browser.component';
 
 import { LoginService } from './services/login.service';
+import { FileService } from './services/file.service';
 
 
 const appRoutes: Routes = [ 
@@ -23,6 +24,11 @@ const appRoutes: Routes = [
     path: 'settings',
     component: SettingsComponent,
     data: { title: 'Omnimedia: Settings window' }
+  },
+  {
+    path: 'browser',
+    component: BrowserComponent,
+    data: { title: 'Omnimedia: Browser window' }
   },
   { path: '',
     redirectTo: "/login",
@@ -44,7 +50,7 @@ const appRoutes: Routes = [
     HttpModule,
     RouterModule.forRoot(appRoutes),
   ],
-  providers: [LoginService],
+  providers: [LoginService, FileService],
   bootstrap: [AppComponent],
 })
 export class AppModule { }
