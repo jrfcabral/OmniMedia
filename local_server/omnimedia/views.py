@@ -6,6 +6,7 @@ from rest_framework import viewsets
 from omnimedia.auth import OmnimediaAuthentication
 from omnimedia.models import Whitelist, MediaFolder
 from omnimedia.serializers import WhitelistSerializer, MediaFolderSerializer, FileInfoSerializer
+import json
 
 
 class ListWhitelist(APIView):
@@ -31,13 +32,23 @@ class FileView(APIView):
         folder_id = kwargs['folder']
         folder = MediaFolder.objects.get(id=folder_id)
         folder_path = folder.path
-        file_names = [file for file in os.listdir(folder_path) if os.path.isfile(os.path.join(folder_path, file))]
-        files = []
-        for id, file_name in enumerate(file_names):
-            file = {'id': id+1, 'name': file_name, 'media_type': folder.media_type}
-            files.append(file)
-        serializer = FileInfoSerializer(files, many=True)
-        return Response(serializer.data)
+
+        exploreDirectory(folder_path)
+        #serializer = FileInfoSerializer(files, many=True)
+        #return Response(serializer.data)
+        return Response(exploreDirectory(folder_path))
+
+def exploreDirectory(path):
+    files = dict()
+    for i, item in enumerate(os.listdir(path)):
+        if os.path.isdir(os.path.join(path, item)):
+            files[i] = {"name": item, "is_dir": True, "contents": exploreDirectory(os.path.join(path, item))}
+        elif os.path.isfile(os.path.join(path, item)):
+            files[i] = {"name": item, "is_dir": False}
+
+    return files
+            
+
 
 
 

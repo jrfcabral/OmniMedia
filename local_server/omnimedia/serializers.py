@@ -36,6 +36,7 @@ class FileInfoSerializer(serializers.Serializer):
     id = serializers.IntegerField(read_only=True)
     name = serializers.CharField(read_only=True)
     media_type = serializers.ChoiceField(choices=MediaFolder.MEDIA_CHOICES, read_only=True)
+    is_dir = serializers.BooleanField(read_only=True)
     artist = serializers.CharField(required=False, read_only=True)
     album = serializers.CharField(required=False, read_only=True)
 
