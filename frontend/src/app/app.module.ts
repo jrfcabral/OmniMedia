@@ -1,4 +1,3 @@
-import { FileComponent } from './browser/file.component';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
@@ -10,6 +9,8 @@ import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
 import { SettingsComponent } from './settings/settings.component';
 import { BrowserComponent } from './browser/browser.component';
+import { FileComponent } from './browser/file.component';
+import { PlayerComponent } from './player/player.component';
 
 import { LoginService } from './services/login.service';
 import { FileService } from './services/file.service';
@@ -44,7 +45,8 @@ const appRoutes: Routes = [
     LoginComponent,
     SettingsComponent,
     BrowserComponent,
-    FileComponent
+    FileComponent,
+    PlayerComponent
   ],
   imports: [
     BrowserModule,

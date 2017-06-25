@@ -1,4 +1,4 @@
-{{file.name}} <button type="button" class="btn btn-default" (click)="toggleExpand()" *ngIf="file.is_dir">expand</button>
+{{file.name}} <button type="button" class="btn btn-default" (click)="toggleExpand()" *ngIf="file.is_dir">expand</button> <button *ngIf="!file.is_dir" (click)="selectFile()" type="button" class="btn btn-default btn-sm">Select</button>
     <ul class="list-group" *ngIf="expanded">
-    <app-file class="list-group-item" *ngFor="let subfile of file.contents" [file]="subfile"></app-file>
+    <app-file class="list-group-item" *ngFor="let subfile of file.contents" [file]="subfile" (selectFileEvent)="fileSelected($event)"></app-file>
     </ul>

@@ -13,9 +13,18 @@ import { Observable } from 'rxjs/Observable';
 export class BrowserComponent {
 
     files: File[];
+    selectedFile: File = {"name": "lol", "is_dir": false};
 
     constructor(private fs: FileService) {
-      fs.getFolderFiles(1).subscribe(res => this.files = res.json());
+      fs.getFolderFiles(2).subscribe(res => this.files = res.json());
     }
+
+    private fileSelected(theFile){
+      console.log("got it in browser component!");
+      console.log(theFile);
+      this.selectedFile = theFile;
+    }
+
+
 
 }
