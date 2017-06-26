@@ -6,6 +6,8 @@ from rest_framework import viewsets
 from omnimedia.auth import OmnimediaAuthentication
 from omnimedia.models import Whitelist, MediaFolder
 from omnimedia.serializers import WhitelistSerializer, MediaFolderSerializer, FileInfoSerializer
+import mutagen
+from mutagen.mp3 import EasyMP3, MP3
 import json
 
 
@@ -34,13 +36,32 @@ class FileView(APIView):
         folder_path = folder.path
         return Response(exploreDirectoryList(folder_path))
 
+mp3_metadata = ["title", "artist", "genre", "album", "albumartist", "tracknumber"]
+
+def metadata(path, item):
+    data = {"name": item, "is_dir": False}
+    filepath = os.path.join(path, item)
+    
+    filetype = mutagen.File(filepath)
+    if filetype != None and "audio/mp3" in filetype.mime:
+        tags = EasyMP3(filepath)
+        for key in tags.keys():
+            data[key] = ", ".join(tags[key])
+        for defaultData in mp3_metadata:
+            if defaultData not in data:
+                data[defaultData] =  ""
+        data["length"] = MP3(filepath).info.length
+
+    return data
+
+
 def exploreDirectoryList(path):
     files = list()
     for i, item in enumerate(os.listdir(path)):
         if os.path.isdir(os.path.join(path, item)):
             files.append({"name": item, "is_dir": True, "contents": exploreDirectoryList(os.path.join(path, item))})
         elif os.path.isfile(os.path.join(path, item)):
-            files.append({"name": item, "is_dir": False})
+            files.append(metadata(path, item))
 
     return files
             
@@ -50,7 +71,7 @@ def exploreDirectoryDict(path):
         if os.path.isdir(os.path.join(path, item)):
             files[i] = {"name": item, "is_dir": True, "contents": exploreDirectoryDict(os.path.join(path, item))}
         elif os.path.isfile(os.path.join(path, item)):
-            files[i] = {"name": item, "is_dir": False}
+            files[i] = metadata(path, item)
 
     return files
 
