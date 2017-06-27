@@ -16,7 +16,7 @@ export class BrowserComponent {
     selectedFile: File = {"name": "lol", "is_dir": false};
 
     constructor(private fs: FileService) {
-      fs.getFolderFiles(2).subscribe(res => this.files = res.json());
+      fs.getFolderFiles(1).subscribe(res => this.files = res.json());
     }
 
     private fileSelected(theFile){
