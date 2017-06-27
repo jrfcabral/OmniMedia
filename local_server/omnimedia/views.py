@@ -19,20 +19,34 @@ class ListWhitelist(APIView):
         return Response(serializer.data)
 
 class MediaFolderView(viewsets.ModelViewSet):
-    authentication_classes = (OmnimediaAuthentication,)
-    permission_classes = (permissions.IsAuthenticated,)
+    authentication_classes = ()
+    permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
     serializer_class = MediaFolderSerializer
     queryset =MediaFolder.objects.all()
 
 class FileView(APIView):
     authentication_classes = (OmnimediaAuthentication,)
-    permission_classes = (permissions.IsAuthenticated,)
+    permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
 
     def get(self, request, **kwargs):
         folder_id = kwargs['folder']
         folder = MediaFolder.objects.get(id=folder_id)
         folder_path = folder.path
         return Response(exploreDirectoryList(folder_path))
+
+class FileDownload(APIView):
+    authentication_classes = ()
+    permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
+
+    def get(self, request, **kwargs):
+        response = Response()
+        folder_id = kwargs['folder']
+        folder_path = MediaFolder.objects.get(id=folder_id).path
+        file_path = "/".join((folder_path + "/"+ kwargs['path']).split('/')[1:])
+        response['X-Accel-Redirect'] = '/protected_files/'+file_path
+        response['X-Accel-Buffering'] = False
+        response['Content-Type'] = 'audio/mpeg'
+        return response
 
 def exploreDirectoryList(path):
     files = list()
@@ -44,15 +58,6 @@ def exploreDirectoryList(path):
 
     return files
             
-def exploreDirectoryDict(path):
-    files = dict()
-    for i, item in enumerate(os.listdir(path)):
-        if os.path.isdir(os.path.join(path, item)):
-            files[i] = {"name": item, "is_dir": True, "contents": exploreDirectoryDict(os.path.join(path, item))}
-        elif os.path.isfile(os.path.join(path, item)):
-            files[i] = {"name": item, "is_dir": False}
-
-    return files
 
 
 
