@@ -47,8 +47,12 @@ class FileDownload(APIView):
     def get(self, request, **kwargs):
         response = Response()
         folder_id = kwargs['folder']
-        folder_path = MediaFolder.objects.get(id=folder_id).path
-        file_path = "/".join((folder_path + "/"+ kwargs['path']).split('/')[1:])
+        try:
+            folder_path = MediaFolder.objects.get(id=folder_id).path
+        except MediaFolder.DoesNotExist:
+            return Response(status=404)
+
+        file_path = "/".join((kwargs['path']).split('/')[1:])
         response['X-Accel-Redirect'] = '/protected_files/'+file_path
         response['X-Accel-Buffering'] = False
         response['Content-Type'] = 'audio/mpeg'
