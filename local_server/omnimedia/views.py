@@ -4,7 +4,7 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework import viewsets
 from omnimedia.auth import OmnimediaAuthentication
-from omnimedia.models import Whitelist, MediaFolder
+from omnimedia.models import Whitelist, MediaFolder, MediaMetadata
 from omnimedia.serializers import WhitelistSerializer, MediaFolderSerializer, FileInfoSerializer
 import mutagen
 from mutagen.mp3 import EasyMP3, MP3
@@ -27,13 +27,17 @@ class MediaFolderView(viewsets.ModelViewSet):
     queryset =MediaFolder.objects.all()
 
 class FileView(APIView):
-    authentication_classes = (OmnimediaAuthentication,)
+    authentication_classes = ()
     permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
 
     def get(self, request, **kwargs):
         folder_id = kwargs['folder']
-        folder = MediaFolder.objects.get(id=folder_id)
+        try:
+            folder = MediaFolder.objects.get(id=folder_id)
+        except MediaFolder.DoesNotExist:
+            return Response(status=404)
         folder_path = folder.path
+        print(exploreDirectoryList(folder_path))
         return Response(exploreDirectoryList(folder_path))
 
 class FileDownload(APIView):
@@ -52,19 +56,24 @@ class FileDownload(APIView):
 mp3_metadata = ["title", "artist", "genre", "album", "albumartist", "tracknumber"]
 
 def metadata(path, item):
-    data = {"name": item, "is_dir": False}
     filepath = os.path.join(path, item)
-    
+    data = {"name": item, "is_dir": False, "filepath": filepath}
+
+    if MediaMetadata.objects.filter(filepath=filepath).exists():
+        metadata = MediaMetadata.objects.get(filepath=filepath)
+        value = metadata.__dict__
+        del value['_state']
+        return value
+
     filetype = mutagen.File(filepath)
     if filetype != None and "audio/mp3" in filetype.mime:
         tags = EasyMP3(filepath)
         for key in tags.keys():
             data[key] = ", ".join(tags[key])
-        for defaultData in mp3_metadata:
-            if defaultData not in data:
-                data[defaultData] =  ""
         data["length"] = MP3(filepath).info.length
 
+    print(data)
+    MediaMetadata(**data).save()
     return data
 
 

@@ -7,6 +7,22 @@ class Whitelist(models.Model):
     enabled = models.BooleanField(default= True)
     admin = models.BooleanField(default= False)
 
+class MediaMetadata(models.Model):
+    title = models.CharField(max_length=200, null=True)
+    artist = models.CharField(max_length=200, null=True)
+    genre = models.CharField(max_length=200, null=True)
+    album = models.CharField(max_length=200, null=True)
+    albumartist = models.CharField(max_length=200, null=True)
+    filepath = models.CharField(max_length=1000, null=True, blank=False)
+    name = models.CharField(max_length=1000, null=True, blank=False)
+    is_dir = models.BooleanField(default=False)
+    tracknumber = models.CharField(max_length=10, null=True)
+    compilation= models.CharField(max_length=200, null=True)
+    composer= models.CharField(max_length=200, null=True)
+    length = models.IntegerField(null=True)
+    date = models.IntegerField(null=True)
+
+
 class MediaFolder(models.Model):
     MEDIA_CHOICES = (
         ('AUD', 'Audiobook'),
