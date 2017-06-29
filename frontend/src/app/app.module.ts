@@ -15,6 +15,11 @@ import { PlayerComponent } from './player/player.component';
 import { LoginService } from './services/login.service';
 import { FileService } from './services/file.service';
 
+import {VgCoreModule} from 'videogular2/core';
+import {VgControlsModule} from 'videogular2/controls';
+import {VgOverlayPlayModule} from 'videogular2/overlay-play';
+import {VgBufferingModule} from 'videogular2/buffering';
+
 
 const appRoutes: Routes = [ 
    {
@@ -46,13 +51,18 @@ const appRoutes: Routes = [
     SettingsComponent,
     BrowserComponent,
     FileComponent,
-    PlayerComponent
+    PlayerComponent,
   ],
   imports: [
     BrowserModule,
     FormsModule,
     HttpModule,
     RouterModule.forRoot(appRoutes),
+    VgCoreModule,
+    VgControlsModule,
+    VgOverlayPlayModule,
+    VgBufferingModule,
+
   ],
   providers: [LoginService, FileService],
   bootstrap: [AppComponent],
