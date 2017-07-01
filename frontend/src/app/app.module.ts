@@ -1,3 +1,5 @@
+import { SettingsService } from './services/settings.service';
+import { BaseService } from './services/base.service';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
@@ -64,7 +66,7 @@ const appRoutes: Routes = [
     VgBufferingModule,
 
   ],
-  providers: [LoginService, FileService],
+  providers: [LoginService, FileService, BaseService, SettingsService],
   bootstrap: [AppComponent],
 })
 export class AppModule { }

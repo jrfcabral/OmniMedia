@@ -1,3 +1,4 @@
+import { BaseService } from './../services/base.service';
 import { File } from './../interfaces/File';
 import { Component } from '@angular/core';
 
@@ -12,17 +13,23 @@ import { Observable } from 'rxjs/Observable';
 })
 export class BrowserComponent {
 
-    files: File[];
-    selectedFile: File = {"name": "lol", "is_dir": false};
+    files: File[] = [];
+    selectedFile: File = {name: "lol", is_dir: false};
 
-    constructor(private fs: FileService) {
-      fs.getFolderFiles(1).subscribe(res => this.files = res.json());
+    constructor(private fs: FileService, private bs: BaseService) {
+      fs.getFolderFiles().subscribe(res => {
+        res.forEach(element => {
+          element.json().forEach(subelement => this.files.push(subelement));
+        });
+      });
     }
 
     private fileSelected(theFile){
       console.log("got it in browser component!");
       console.log(theFile);
       this.selectedFile = theFile;
+      this.bs.get("http://localhost", "file/1", [{key: "search", value: "lol"}]).subscribe(console.log);
+
     }
 
 

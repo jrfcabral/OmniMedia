@@ -19,8 +19,10 @@ object MyServer extends ServerApp {
   val connectionUrl = "jdbc:postgresql://jrfcabral.me/omnimedia?user=omnimedia&password=N4MxixTqan"
   val database = Database.forURL(connectionUrl, driver="org.postgresql.Driver")
   val users = TableQuery[User];
+  val local_servers = TableQuery[LocalServer];
   val setup =DBIO.seq(
-    users.schema.create
+    users.schema.create,
+    local_servers.schema.create
   )
   database.run(setup)
 

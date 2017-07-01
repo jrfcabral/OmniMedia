@@ -23,6 +23,19 @@ class User(tag: Tag) extends Table[(Int, String, String)](tag, "USER") {
     (id, email, hash)
 }
 
+class LocalServer(tag: Tag) extends Table[(Int, String)](tag, "LOCAL_SERVER") {
+
+
+  def id: Rep[Int] = column[Int]("LOCAL_SERVER_ID", O.PrimaryKey, O.AutoInc)
+
+  def url: Rep[String] = column[String]("LOCAL_SERVER", O.Unique)
+
+  def * : ProvenShape[(Int, String)] = (id, url)
+}
+
+
+case class LocalServerRequest(url: String)
+
 case class UserRequest(email: String, password: String)
 
 object User {
@@ -52,4 +65,29 @@ object User {
     }).toTask
     result
   }
+}
+
+object LocalServer {
+  private val local_servers = TableQuery[LocalServer]
+
+  def insertIfNotExists(url: String): Task[Boolean] = {
+    val query = local_servers += (1, url)
+    val result = MyServer.database.run(query) map {
+      _ => true
+    } recover {
+      case _ => false
+    }
+    result.toTask
+  }
+
+  def getAll: Task[Seq[String]] = {
+    val result = MyServer.database.run(local_servers.result).map {
+      _.map {
+        case (_, url: String) => url
+      }
+    }
+    result.toTask
+  }
+
+
 }

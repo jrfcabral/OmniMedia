@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { SettingsService } from './../services/settings.service';
+import { Component, ViewChild, OnInit, AfterViewInit } from '@angular/core';
 
 @Component({
   selector: 'settings',
@@ -7,9 +8,13 @@ import { Component } from '@angular/core';
 })
 export class SettingsComponent {
 
-    authServer: string;
-    mediaFolder: string;
+    private authServer: string;
 
-    constructor() {}
+    constructor(public settingsService: SettingsService) {
+      settingsService.getAuthServer().subscribe(server => this.authServer = server);
+    }
 
+    private settingsChanged(): void {
+      this.settingsService.setAuthServer(this.authServer);
+    }
 }
