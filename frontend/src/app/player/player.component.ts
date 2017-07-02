@@ -3,7 +3,7 @@ import { Component, Input } from '@angular/core';
 
 import { File } from '../interfaces/File';
 
-import 'rxjs/add/Operator/map';
+//import 'rxjs/add/Operator/map';
 import {VgAPI} from 'videogular2/core';
 
 

@@ -12,6 +12,11 @@ export interface File{
     compilation?: any;
     composer?: any;
     length?: number;
-    date?: number;
+    date?: any;
     contents?: File[];
+    organization?: string;
+    discnumber?: number;
+    language?: string;
+    isrc?: any;
+
 }

@@ -64,10 +64,14 @@ def metadata(path, item):
     data = {"name": item, "is_dir": False, "filepath": filepath}
 
     if MediaMetadata.objects.filter(filepath=filepath).exists():
-        metadata = MediaMetadata.objects.get(filepath=filepath)
-        value = metadata.__dict__
-        del value['_state']
-        return value
+        try:
+            metadata = MediaMetadata.objects.get(filepath=filepath)
+            value = metadata.__dict__
+            del value['_state']
+            return value
+        except:
+            pass
+        
 
     filetype = mutagen.File(filepath)
     if filetype != None and "audio/mp3" in filetype.mime:
