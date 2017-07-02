@@ -14,24 +14,28 @@ import { Observable } from 'rxjs/Observable';
 export class BrowserComponent {
 
     files: File[] = [];
-    selectedFile: File = {name: "lol", is_dir: false};
+    flatFiles: File[] = [];
+    selectedFile: File = {id: 1, name: '', is_dir: false};
+    sortOption = 'folders';
 
-    constructor(private fs: FileService, private bs: BaseService) {
-      fs.getFolderFiles().subscribe(res => {
+    constructor(private fs: FileService) {
+      fs.getFolderFiles(false).subscribe(res => {
         res.forEach(element => {
           element.json().forEach(subelement => this.files.push(subelement));
         });
       });
-    }
+      fs.getFolderFiles(true).subscribe(res => {
+        res.forEach(element => {
+          element.json().forEach(subelement => this.flatFiles.push(subelement));
+        });
+      });    }
 
-    private fileSelected(theFile){
-      console.log("got it in browser component!");
-      console.log(theFile);
+    private fileSelected(theFile) {
       this.selectedFile = theFile;
-      this.bs.get("http://localhost", "file/1", [{key: "search", value: "lol"}]).subscribe(console.log);
-
     }
 
-
+    private toggleOption(opt){
+      this.sortOption = opt;
+    }
 
 }

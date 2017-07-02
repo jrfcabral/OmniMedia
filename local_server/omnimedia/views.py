@@ -38,7 +38,7 @@ class FileView(APIView):
             return Response(status=404)
         folder_path = folder.path
         print(exploreDirectoryList(folder_path))
-        return Response(exploreDirectoryList(folder_path))
+        return Response(exploreDirectoryList(folder_path, request.query_params['flat']))
 
 class FileDownload(APIView):
     authentication_classes = ()
@@ -81,27 +81,19 @@ def metadata(path, item):
     return data
 
 
-def exploreDirectoryList(path):
+def exploreDirectoryList(path, flat='false'):
     files = list()
     for i, item in enumerate(os.listdir(path)):
         if os.path.isdir(os.path.join(path, item)):
-            files.append({"name": item, "is_dir": True, "contents": exploreDirectoryList(os.path.join(path, item))})
+            if not flat == 'true':
+                files.append({"name": item, "is_dir": True, "contents": exploreDirectoryList(os.path.join(path, item))})
+            else:
+                files.extend(exploreDirectoryList(os.path.join(path, item), 'true'))
         elif os.path.isfile(os.path.join(path, item)):
             files.append(metadata(path, item))
 
     return files
             
-def exploreDirectoryDict(path):
-    files = dict()
-    for i, item in enumerate(os.listdir(path)):
-        if os.path.isdir(os.path.join(path, item)):
-            files[i] = {"name": item, "is_dir": True, "contents": exploreDirectoryDict(os.path.join(path, item))}
-        elif os.path.isfile(os.path.join(path, item)):
-            files[i] = metadata(path, item)
-
-    return files
-
-
 
 
 

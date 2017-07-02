@@ -1,10 +1,24 @@
 <div class="row">
-    <div class="col-md-5">
-        <ul class="list-group">
-            <app-file class="list-group-item" *ngFor="let file of files" [file]="file" (selectFileEvent)="fileSelected($event)">      </app-file>
-        </ul>
+    <div class="col-md-3">
+        <div class="panel panel-info">
+            <div class="panel-header">
+                <ul class="nav nav-tabs">
+                    <li (click)="toggleOption('folders')" [class.active]="sortOption == 'folders'"><a>Folders</a></li>
+                    <li (click)="toggleOption('artists')" [class.active]="sortOption == 'artists'"><a>Artists</a></li>
+                    <li  (click)="toggleOption('albums')" [class.active]="sortOption == 'albums'"><a>Albums</a></li>
+                </ul>
+            </div>
+            <div class="panel-body">
+                <ul *ngIf="sortOption == 'folders'" class="list-group">
+                    <app-file class="list-group-item" *ngFor="let file of files" [file]="file" (selectFileEvent)="fileSelected($event)"> </app-file>
+                </ul>
+                <ul *ngIf="sortOption === 'albums' || sortOption === 'artists'" class="list-group">
+                    <filelist [files]="this.flatFiles" [sort]="this.sortOption" (selectFileEvent)="fileSelected($event)"></filelist>
+                </ul>
+            </div>
+        </div>
     </div>
-    <div class="col-md-7">
+    <div class="col-md-9">
         <player [selectedFile]="selectedFile"></player>
     </div>
 </div>

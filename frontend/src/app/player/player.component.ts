@@ -8,27 +8,26 @@ import {VgAPI} from 'videogular2/core';
 
 
 @Component({
-    selector: "player",
+    selector: 'player',
     templateUrl: './player.component.html',
     styleUrls: ['./player.component.css']
 })
 export class PlayerComponent{
     @Input('selectedFile') private selectedFile: File;
-    private vgApi : VgAPI;
+    private vgApi: VgAPI;
 
-    playing: boolean = false;;
+    playing = false;
 
-    public constructor(private http: Http){
+    public constructor(private http: Http) {
         http.get('ola').map
     }
 
-    private togglePlaying(){
+    private togglePlaying() {
         this.playing = !this.playing;
     }
 
     private onPlayerReady(api: VgAPI) {
         api.getDefaultMedia().subscriptions.progress.subscribe(next => console.log(next));
-        
     }
 
 }

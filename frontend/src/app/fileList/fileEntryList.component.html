@@ -1,0 +1,4 @@
+<div class="list-group-item"><strong>{{key}}</strong> <button (click)="toggleExpand()" class="btn btn-default">Expand</button> </div>
+<div *ngIf="expanded">
+<app-file class="list-group-item" *ngFor="let file of files" (selectFileEvent)="fileSelected($event)" [file]="file"></app-file>
+</div>

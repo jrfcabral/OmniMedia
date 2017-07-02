@@ -23,7 +23,7 @@ export class FileService {
 
     }
 
-    public getFolderFiles(): Observable<any> {
+    public getFolderFiles(flat: boolean = true): Observable<any> {
         return this.settingService.getAuthServer().mergeMap(authServer =>
             this.http.get(authServer + '/local_server', this.options)
         ).mergeMap(localServers => {
@@ -34,7 +34,7 @@ export class FileService {
                 const url = folderResponse.url.split('/').slice(0, 3).join('/') + '/file/';
                 const folders = folderResponse.json();
 
-                return folders.map(folder => this.http.get(url + folder.id, this.options))
+                return folders.map(folder => this.http.get(url + folder.id + '?flat=' + flat, this.options))
             });
             return Observable.forkJoin([].concat.apply([], observables));
         });
