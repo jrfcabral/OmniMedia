@@ -1,4 +1,13 @@
-{{file.name}} <button type="button" class="btn btn-default" (click)="toggleExpand()" *ngIf="file.is_dir">expand</button> <button *ngIf="!file.is_dir" (click)="selectFile()" type="button" class="btn btn-default btn-sm">Select</button>
-    <ul class="list-group" *ngIf="expanded">
-    <app-file class="list-group-item" *ngFor="let subfile of file.contents" [file]="subfile" (selectFileEvent)="fileSelected($event)"></app-file>
+<div [class.expanded]="expanded" [class.unexpanded]="!expanded">
+{{file.name}} 
+    <button type="button" class="btn btn-default btn-sm" (click)="toggleExpand()" *ngIf="file.is_dir">
+        <span *ngIf="!expanded" class="glyphicon glyphicon-menu-right"></span>
+        <span *ngIf="expanded" class="glyphicon glyphicon-menu-down"></span>
+    </button> 
+    <button *ngIf="!file.is_dir" (click)="selectFile()" type="button" class="btn btn-default btn-sm">
+        <span class="glyphicon glyphicon-play"></span>
+    </button>
+    <ul *ngIf="expanded" class="list-group-item">
+    <app-file *ngFor="let subfile of file.contents" [file]="subfile" (selectFileEvent)="fileSelected($event)"></app-file>
     </ul>
+</div>

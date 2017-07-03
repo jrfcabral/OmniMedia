@@ -1,0 +1,6 @@
+#browser-body{
+    min-height: 65em;
+    max-height: 65em;
+    overflow-y: auto;
+    overflow-x: auto;
+}

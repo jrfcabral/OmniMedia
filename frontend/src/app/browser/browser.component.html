@@ -5,14 +5,17 @@
                 <ul class="nav nav-tabs">
                     <li (click)="toggleOption('folders')" [class.active]="sortOption == 'folders'"><a>Folders</a></li>
                     <li (click)="toggleOption('artists')" [class.active]="sortOption == 'artists'"><a>Artists</a></li>
-                    <li  (click)="toggleOption('albums')" [class.active]="sortOption == 'albums'"><a>Albums</a></li>
+                    <li (click)="toggleOption('albums')" [class.active]="sortOption == 'albums'"><a>Albums</a></li>
                 </ul>
             </div>
-            <div class="panel-body">
+            <div id="browser-body" class="panel-body">
                 <ul *ngIf="sortOption == 'folders'" class="list-group">
-                    <app-file class="list-group-item" *ngFor="let file of files" [file]="file" (selectFileEvent)="fileSelected($event)"> </app-file>
+                    <app-file *ngFor="let file of files" [file]="file" (selectFileEvent)="fileSelected($event)"> </app-file>
                 </ul>
-                <ul *ngIf="sortOption === 'albums' || sortOption === 'artists'" class="list-group">
+                <ul *ngIf="sortOption === 'albums'" class="list-group">
+                    <filelist [files]="this.flatFiles" [sort]="this.sortOption" (selectFileEvent)="fileSelected($event)"></filelist>
+                </ul>
+                <ul *ngIf="sortOption === 'artists'" class="list-group">
                     <filelist [files]="this.flatFiles" [sort]="this.sortOption" (selectFileEvent)="fileSelected($event)"></filelist>
                 </ul>
             </div>

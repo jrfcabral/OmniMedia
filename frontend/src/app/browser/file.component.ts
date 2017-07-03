@@ -3,7 +3,8 @@ import { Component, Input, EventEmitter, Output } from '@angular/core';
 
 @Component({
     selector: 'app-file',
-    templateUrl: './file.component.html'
+    templateUrl: './file.component.html',
+    styleUrls: ['./file.component.css']
 })
 export class FileComponent {
     @Input('file') private file: File;

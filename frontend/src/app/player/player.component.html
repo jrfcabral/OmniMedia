@@ -1,11 +1,12 @@
-<h1>
-    Very good media player (TM)
-</h1>
+
 <div class="row">
-    {{selectedFile.name}}
+    <h1>
+        Now Playing: {{selectedFile.title}}
+
+    </h1>
 </div>
 <div class="row">
-    <vg-player (onPlayerReady)="onPlayerReady($event)">
+    <vg-player id="player" (onPlayerReady)="onPlayerReady($event)">
         <vg-overlay-play></vg-overlay-play>
         <vg-buffering></vg-buffering>
 
