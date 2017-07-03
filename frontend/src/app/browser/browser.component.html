@@ -8,7 +8,7 @@
                     <li (click)="toggleOption('albums')" [class.active]="sortOption == 'albums'"><a>Albums</a></li>
                 </ul>
             </div>
-            <div class="panel-body">
+            <div id="browser-body" class="panel-body">
                 <ul *ngIf="sortOption == 'folders'" class="list-group">
                     <app-file *ngFor="let file of files" [file]="file" (selectFileEvent)="fileSelected($event)"> </app-file>
                 </ul>

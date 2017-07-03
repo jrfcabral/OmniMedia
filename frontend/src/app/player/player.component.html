@@ -1,12 +1,12 @@
 
 <div class="row">
     <h1>
-        Now Playing: {{selectedFile.name}}
-        
+        Now Playing: {{selectedFile.title}}
+
     </h1>
 </div>
 <div class="row">
-    <vg-player (onPlayerReady)="onPlayerReady($event)">
+    <vg-player id="player" (onPlayerReady)="onPlayerReady($event)">
         <vg-overlay-play></vg-overlay-play>
         <vg-buffering></vg-buffering>
 
