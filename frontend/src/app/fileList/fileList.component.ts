@@ -35,6 +35,16 @@ export class FileListComponent implements OnInit {
         this.keys = Object.keys(this.sortedFiles);
     }
 
+    ngOnChanges() {
+        if (this.sort === 'artists') {
+            this.sortedFiles = this.filesByProperty('artist');
+        } else if (this.sort === 'albums') {
+            this.sortedFiles = this.filesByProperty('album');
+        }
+        this.keys = Object.keys(this.sortedFiles);
+
+    }
+
     private fileSelected(theFile){
         console.log("got it in file component!");
         console.log(theFile);

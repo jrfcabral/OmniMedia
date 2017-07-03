@@ -32,13 +32,16 @@ class FileView(APIView):
 
     def get(self, request, **kwargs):
         folder_id = kwargs['folder']
+        flat = 'false'
+        if 'flat' in request.query_params:
+            flat
         try:
             folder = MediaFolder.objects.get(id=folder_id)
         except MediaFolder.DoesNotExist:
             return Response(status=404)
         folder_path = folder.path
         print(exploreDirectoryList(folder_path))
-        return Response(exploreDirectoryList(folder_path, request.query_params['flat']))
+        return Response(exploreDirectoryList(folder_path,flat))
 
 class FileDownload(APIView):
     authentication_classes = ()

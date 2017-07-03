@@ -13,7 +13,7 @@ class MediaMetadata(models.Model):
     genre = models.CharField(max_length=200, null=True)
     album = models.CharField(max_length=200, null=True)
     albumartist = models.CharField(max_length=200, null=True)
-    filepath = models.CharField(max_length=1000, null=True, blank=False)
+    filepath = models.CharField(max_length=1000, null=True, blank=False, db_index=True)
     name = models.CharField(max_length=1000, null=True, blank=False)
     is_dir = models.BooleanField(default=False)
     tracknumber = models.CharField(max_length=10, null=True)
