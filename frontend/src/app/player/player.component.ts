@@ -10,7 +10,7 @@ import {VgAPI} from 'videogular2/core';
 @Component({
     selector: 'player',
     templateUrl: './player.component.html',
-    styleUrls: ['./player.component.scss',]
+    styleUrls: ['./player.component.css',]
 })
 export class PlayerComponent implements OnChanges{
     @Input('selectedFile') private selectedFile: File;
