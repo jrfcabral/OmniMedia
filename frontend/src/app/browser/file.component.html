@@ -8,6 +8,6 @@
         <span class="glyphicon glyphicon-play"></span>
     </button>
     <ul *ngIf="expanded" class="list-group-item">
-    <app-file  *ngFor="let subfile of file.contents" [file]="subfile" (selectFileEvent)="fileSelected($event)"></app-file>
+    <app-file *ngFor="let subfile of file.contents" [file]="subfile" (selectFileEvent)="fileSelected($event)"></app-file>
     </ul>
 </div>
