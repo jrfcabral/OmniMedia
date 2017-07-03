@@ -34,7 +34,7 @@ class FileView(APIView):
         folder_id = kwargs['folder']
         flat = 'false'
         if 'flat' in request.query_params:
-            flat
+            flat = request.query_params['flat']
         try:
             folder = MediaFolder.objects.get(id=folder_id)
         except MediaFolder.DoesNotExist:
@@ -83,7 +83,6 @@ def metadata(path, item):
             data[key] = ", ".join(tags[key])
         data["length"] = MP3(filepath).info.length
 
-    print(data)
     MediaMetadata(**data).save()
     return data
 

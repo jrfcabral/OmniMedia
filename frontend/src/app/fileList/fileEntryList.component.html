@@ -1,5 +1,6 @@
 <div [class.expanded]="expanded" [class.unexpanded]="!expanded">
-    <strong>{{key}}</strong> 
+    <strong *ngIf="key !== 'null'">{{key}}</strong> 
+    <strong *ngIf="key === 'null'">Uncategorized</strong>
     <button (click)="toggleExpand()" class="btn btn-default btn-sm">
         <span *ngIf="!expanded" class="glyphicon glyphicon-menu-right"></span>
         <span *ngIf="expanded" class="glyphicon glyphicon-menu-down"></span>

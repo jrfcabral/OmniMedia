@@ -1,3 +1,4 @@
+import { SearchComponent } from './search/search.component';
 import { FileListEntry } from './fileList/fileListEntry.component';
 import { SettingsService } from './services/settings.service';
 import { BaseService } from './services/base.service';
@@ -45,6 +46,11 @@ const appRoutes: Routes = [
     redirectTo: "/browser",
     pathMatch: 'full'
   },
+  {
+    path: 'search',
+    component: SearchComponent,
+    data: { title: 'Omnimedia: Search Window'}
+  }
 ];
 
 
@@ -58,6 +64,7 @@ const appRoutes: Routes = [
     PlayerComponent,
     FileListComponent,
     FileListEntry,
+    SearchComponent,
   ],
   imports: [
     BrowserModule,

@@ -22,7 +22,7 @@ class MediaMetadata(models.Model):
     length = models.IntegerField(null=True)
     date = models.CharField(max_length=200, null=True)
     organization = models.CharField(max_length=200, null=True)
-    discnumber = models.IntegerField(null=True)
+    discnumber = models.CharField(max_length=200, null=True)
     language = models.CharField(max_length=200, null=True)
     isrc = models.CharField(max_length=200, null=True)
 

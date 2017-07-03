@@ -1,33 +1,42 @@
+import { AlbumCoverService } from './../services/album-cover.service';
 import { Http } from '@angular/http';
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
 
 import { File } from '../interfaces/File';
 
-//import 'rxjs/add/Operator/map';
 import {VgAPI} from 'videogular2/core';
 
 
 @Component({
     selector: 'player',
     templateUrl: './player.component.html',
-    styleUrls: ['./player.component.css']
+    styleUrls: ['./player.component.scss',]
 })
-export class PlayerComponent{
+export class PlayerComponent implements OnChanges{
     @Input('selectedFile') private selectedFile: File;
-    private vgApi: VgAPI;
+    private img: string;
 
     playing = false;
+    vgApi: VgAPI;
 
-    public constructor(private http: Http) {
-        http.get('ola').map
+    public constructor(private http: Http, private albumCover: AlbumCoverService) {
     }
 
     private togglePlaying() {
         this.playing = !this.playing;
     }
 
-    private onPlayerReady(api: VgAPI) {
-        api.getDefaultMedia().subscriptions.progress.subscribe(next => console.log(next));
+    ngOnChanges(changes: SimpleChanges) {
+        this.albumCover.getAlbumCover(this.selectedFile.album, this.selectedFile.artist).subscribe(
+            success => this.img = success,
+            err => this.img = undefined
+        );
+    }
+
+    onPlayerReady(api:VgAPI) {
+        this.vgApi = api;
+        this.vgApi.getDefaultMedia().subscriptions.canPlayThrough.subscribe(ev => this.vgApi.play());
+        this.vgApi.getDefaultMedia().subscriptions.ended.subscribe(ev => console.log('num da mais'));
     }
 
 }

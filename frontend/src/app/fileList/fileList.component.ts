@@ -15,8 +15,8 @@ export class FileListComponent implements OnInit {
     @Output() selectFileEvent: EventEmitter<File> = new EventEmitter(true);
 
 
-    private sortedFiles;
-    private keys;
+    private sortedFiles: File[];
+    private keys: string[];
 
     public constructor(){
         console.log('criado')
@@ -32,7 +32,6 @@ export class FileListComponent implements OnInit {
         } else if (this.sort === 'albums') {
             this.sortedFiles = this.filesByProperty('album');
         }
-        this.keys = Object.keys(this.sortedFiles);
     }
 
     ngOnChanges() {

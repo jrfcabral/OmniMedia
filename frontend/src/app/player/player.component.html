@@ -1,8 +1,8 @@
 
 <div class="row">
     <h1>
-        Now Playing: {{selectedFile.title}}
-
+        Now Playing: {{selectedFile.title}}<br>
+        <img [src]="img" *ngIf="img" width=500>
     </h1>
 </div>
 <div class="row">
@@ -11,7 +11,7 @@
         <vg-buffering></vg-buffering>
 
         <vg-scrub-bar>
-            <vg-scrub-bar-current-time></vg-scrub-bar-current-time>
+            <vg-scrub-bar-current-time>PLay</vg-scrub-bar-current-time>
             <vg-scrub-bar-buffering-time></vg-scrub-bar-buffering-time>
         </vg-scrub-bar>
 

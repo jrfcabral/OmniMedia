@@ -1,3 +1,4 @@
+import { AlbumCoverService } from './../services/album-cover.service';
 import { BaseService } from './../services/base.service';
 import { File } from './../interfaces/File';
 import { Component } from '@angular/core';
@@ -9,7 +10,8 @@ import { Observable } from 'rxjs/Observable';
 @Component({
   selector: 'browser',
   templateUrl: './browser.component.html',
-  styleUrls: ['./browser.component.css']
+  styleUrls: ['./browser.component.css'],
+  providers: [AlbumCoverService,]
 })
 export class BrowserComponent {
 
@@ -17,8 +19,9 @@ export class BrowserComponent {
     flatFiles: File[] = [];
     selectedFile: File = {id: 1, name: '', is_dir: false};
     sortOption = 'folders';
+    image: string;
 
-    constructor(private fs: FileService) {
+    constructor(private fs: FileService, private albumCover: AlbumCoverService) {
       fs.getFolderFiles(false).subscribe(res => {
         res.forEach(element => {
           element.json().forEach(subelement => this.files.push(subelement));
@@ -30,7 +33,7 @@ export class BrowserComponent {
         });
       });    }
 
-    private fileSelected(theFile) {
+    private fileSelected(theFile: File) {
       this.selectedFile = theFile;
     }
 
