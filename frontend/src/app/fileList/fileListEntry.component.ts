@@ -1,7 +1,8 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 @Component({
     templateUrl: './fileEntryList.component.html',
-    selector: 'file-list-entry'
+    selector: 'file-list-entry',
+    styleUrls: ['./fileEntryList.component.css']
 })
 export class FileListEntry {
     @Input('key') key: string;
