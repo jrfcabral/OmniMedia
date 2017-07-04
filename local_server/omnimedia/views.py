@@ -6,9 +6,8 @@ from rest_framework import viewsets
 from omnimedia.auth import OmnimediaAuthentication
 from omnimedia.models import Whitelist, MediaFolder, MediaMetadata
 from omnimedia.serializers import WhitelistSerializer, MediaFolderSerializer, FileInfoSerializer
-import mutagen
-from mutagen.mp3 import EasyMP3, MP3
 import json
+from omnimedia.utils import *
 
 
 class ListWhitelist(APIView):
@@ -40,7 +39,7 @@ class FileView(APIView):
         except MediaFolder.DoesNotExist:
             return Response(status=404)
         folder_path = folder.path
-        print(exploreDirectoryList(folder_path))
+        #print(exploreDirectoryList(folder_path))
         return Response(exploreDirectoryList(folder_path,flat))
 
 class FileDownload(APIView):
@@ -60,45 +59,10 @@ class FileDownload(APIView):
         response['X-Accel-Buffering'] = False
         response['Content-Type'] = 'audio/mpeg'
         return response
-mp3_metadata = ["title", "artist", "genre", "album", "albumartist", "tracknumber"]
-
-def metadata(path, item):
-    filepath = os.path.join(path, item)
-    data = {"name": item, "is_dir": False, "filepath": filepath}
-
-    if MediaMetadata.objects.filter(filepath=filepath).exists():
-        try:
-            metadata = MediaMetadata.objects.get(filepath=filepath)
-            value = metadata.__dict__
-            del value['_state']
-            return value
-        except:
-            pass
-        
-
-    filetype = mutagen.File(filepath)
-    if filetype != None and "audio/mp3" in filetype.mime:
-        tags = EasyMP3(filepath)
-        for key in tags.keys():
-            data[key] = ", ".join(tags[key])
-        data["length"] = MP3(filepath).info.length
-
-    MediaMetadata(**data).save()
-    return data
+#mp3_metadata = ["title", "artist", "genre", "album", "albumartist", "tracknumber"]
 
 
-def exploreDirectoryList(path, flat='false'):
-    files = list()
-    for i, item in enumerate(os.listdir(path)):
-        if os.path.isdir(os.path.join(path, item)):
-            if not flat == 'true':
-                files.append({"name": item, "is_dir": True, "contents": exploreDirectoryList(os.path.join(path, item))})
-            else:
-                files.extend(exploreDirectoryList(os.path.join(path, item), 'true'))
-        elif os.path.isfile(os.path.join(path, item)):
-            files.append(metadata(path, item))
 
-    return files
             
 
 
