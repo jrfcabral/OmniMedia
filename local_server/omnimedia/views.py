@@ -5,13 +5,10 @@ from rest_framework.views import APIView
 from rest_framework import viewsets
 from omnimedia.auth import OmnimediaAuthentication
 from omnimedia.models import Whitelist, MediaFolder, MediaMetadata
-<<<<<<< Updated upstream
 from omnimedia.serializers import WhitelistSerializer, MediaFolderSerializer, FileInfoSerializer
-=======
 from omnimedia.serializers import WhitelistSerializer, MediaFolderSerializer, FileInfoSerializer, FileSerializer
 import mutagen
 from mutagen.mp3 import EasyMP3, MP3
->>>>>>> Stashed changes
 import json
 from omnimedia.utils import *
 
