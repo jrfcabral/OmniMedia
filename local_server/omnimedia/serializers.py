@@ -1,7 +1,7 @@
 from rest_framework import serializers
 from rest_framework.validators import UniqueValidator
 
-from omnimedia.models import Whitelist, MediaFolder
+from omnimedia.models import Whitelist, MediaFolder, MediaMetadata
 from os import path
 
 
@@ -9,6 +9,11 @@ class WhitelistSerializer(serializers.ModelSerializer):
     class Meta:
         model = Whitelist
         fields = ('email',)
+
+class FileSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = MediaMetadata
+        fields = '__all__'
 
 class MediaFolderSerializer(serializers.Serializer):
     id = serializers.IntegerField(read_only=True)

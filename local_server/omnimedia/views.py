@@ -5,7 +5,13 @@ from rest_framework.views import APIView
 from rest_framework import viewsets
 from omnimedia.auth import OmnimediaAuthentication
 from omnimedia.models import Whitelist, MediaFolder, MediaMetadata
+<<<<<<< Updated upstream
 from omnimedia.serializers import WhitelistSerializer, MediaFolderSerializer, FileInfoSerializer
+=======
+from omnimedia.serializers import WhitelistSerializer, MediaFolderSerializer, FileInfoSerializer, FileSerializer
+import mutagen
+from mutagen.mp3 import EasyMP3, MP3
+>>>>>>> Stashed changes
 import json
 from omnimedia.utils import *
 
@@ -59,7 +65,19 @@ class FileDownload(APIView):
         response['X-Accel-Buffering'] = False
         response['Content-Type'] = 'audio/mpeg'
         return response
+<<<<<<< Updated upstream
 #mp3_metadata = ["title", "artist", "genre", "album", "albumartist", "tracknumber"]
+=======
+
+class MetadataView(mixins.RetrieveModelMixin, mixins.ListModelMixin, viewsets.GenericViewSet):
+    authentication_classes = ()
+    permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
+    serializer_class = FileSerializer
+    queryset = MediaMetadata.objects.all()
+
+
+mp3_metadata = ["title", "artist", "genre", "album", "albumartist", "tracknumber"]
+>>>>>>> Stashed changes
 
 
 
