@@ -65,9 +65,6 @@ class FileDownload(APIView):
         response['X-Accel-Buffering'] = False
         response['Content-Type'] = 'audio/mpeg'
         return response
-<<<<<<< Updated upstream
-#mp3_metadata = ["title", "artist", "genre", "album", "albumartist", "tracknumber"]
-=======
 
 class MetadataView(mixins.RetrieveModelMixin, mixins.ListModelMixin, viewsets.GenericViewSet):
     authentication_classes = ()
@@ -77,8 +74,6 @@ class MetadataView(mixins.RetrieveModelMixin, mixins.ListModelMixin, viewsets.Ge
 
 
 mp3_metadata = ["title", "artist", "genre", "album", "albumartist", "tracknumber"]
->>>>>>> Stashed changes
-
 
 
             
