@@ -1,4 +1,17 @@
 #player{
+    width:100%;
+}
+
+#actualPlayer{
+    width: 100%;
+}
+
+.audio{
     position: absolute;
-    top: 65em;
+    top: 188%;
+    height: 5em;
+}
+
+.video{
+    height: 63em;
 }

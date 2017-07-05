@@ -2,11 +2,11 @@
 <div class="row">
     <h1>
         Now Playing: {{selectedFile.title}}<br>
-        <img [src]="img" *ngIf="img" width=500>
+        <img [src]="img" *ngIf="img" width=400>
     </h1>
 </div>
-<div class="row">
-    <vg-player id="player" (onPlayerReady)="onPlayerReady($event)">
+<div id="player" [class.video]="checkVideoExtension(extension)" [class.audio]="!checkVideoExtension(extension)" class="row">
+    <vg-player id="actualPlayer" (onPlayerReady)="onPlayerReady($event)">
         <vg-overlay-play></vg-overlay-play>
         <vg-buffering></vg-buffering>
 
