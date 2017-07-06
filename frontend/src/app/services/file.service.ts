@@ -24,7 +24,6 @@ export class FileService {
     }
 
     public getFolderFiles(flat: boolean = true): Observable<any> {
-        console.log("called "+ flat);
         return this.settingService.getAuthServer().mergeMap(authServer =>
             this.http.get(authServer + '/local_server', this.options)
         ).mergeMap(localServers => {
@@ -39,6 +38,5 @@ export class FileService {
             });
             return Observable.forkJoin([].concat.apply([], observables));
         });
-        //return this.http.get('http://localhost:8000/file/' + folder, options);
     }
 }

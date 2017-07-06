@@ -1,0 +1,31 @@
+<form class="form-horizontal" [formGroup]="searchForm" novalidate>
+    <div class="form-group">
+        <label for="inputTextual" class="col-sm-2 control-label">Textual Search</label>
+        <div class="col-sm-10">
+            <input type="search" class="form-control" id="inputTextual" formControlName="search" placeholder="Search term">
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="inputAlbum" class="col-sm-2 control-label">Album</label>
+        <div class="col-sm-10">
+            <input type="text" class="form-control" id="inputAlbum" formControlName="album" placeholder="Album name">
+        </div>
+    </div>
+     <div class="form-group">
+        <label for="inputArtist" class="col-sm-2 control-label">Album</label>
+        <div class="col-sm-10">
+            <input type="text" class="form-control" id="inputArtist" formControlName="artist" placeholder="Artist name">
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-2 control-label">Dates range</label>
+        <div class="col-sm-10">
+            <div class="input-daterange" id="datepicker">
+                <div class="input-group">
+                    <input type="number" min="1900" max="2017" class="input-small form-control" formControlName="startYear" name="start" />
+                    <span class="input-group-addon">to</span>
+                    <input type="number" min="1900" max="2017" class="input-small form-control" formControlName="endYear" name="end" />
+                </div>
+            </div>
+        </div>
+    </div>

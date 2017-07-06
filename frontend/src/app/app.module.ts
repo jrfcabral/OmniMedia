@@ -1,10 +1,12 @@
+import { SearchResultComponent } from './search/search-results.component';
+import { SearchFilterComponent } from './search/search-filters.component';
 import { SearchComponent } from './search/search.component';
 import { FileListEntry } from './fileList/fileListEntry.component';
 import { SettingsService } from './services/settings.service';
 import { BaseService } from './services/base.service';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { RouterModule, Routes } from '@angular/router';
 
@@ -65,6 +67,8 @@ const appRoutes: Routes = [
     FileListComponent,
     FileListEntry,
     SearchComponent,
+    SearchFilterComponent,
+    SearchResultComponent,
   ],
   imports: [
     BrowserModule,
@@ -75,7 +79,7 @@ const appRoutes: Routes = [
     VgControlsModule,
     VgOverlayPlayModule,
     VgBufferingModule,
-
+    ReactiveFormsModule,
   ],
   providers: [LoginService, FileService, BaseService, SettingsService],
   bootstrap: [AppComponent],
