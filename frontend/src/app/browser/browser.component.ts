@@ -20,12 +20,14 @@ export class BrowserComponent {
     selectedFile: File = {id: 1, name: '', is_dir: false};
     sortOption = 'folders';
     image: string;
+    loaded = false;
 
     constructor(private fs: FileService, private albumCover: AlbumCoverService) {
       fs.getFolderFiles(false).subscribe(res => {
         res.forEach(element => {
           element.json().forEach(subelement => this.files.push(subelement));
         });
+        this.loaded = true;
       });
       fs.getFolderFiles(true).subscribe(res => {
         res.forEach(element => {

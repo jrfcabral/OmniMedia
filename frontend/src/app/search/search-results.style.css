@@ -1,10 +1,3 @@
-#browser-body{
-    min-height: 65em;
-    max-height: 65em;
-    overflow-y: auto;
-    overflow-x: auto;
-}
-
 .sk-fading-circle {
   margin: 100px auto;
   width: 40px;

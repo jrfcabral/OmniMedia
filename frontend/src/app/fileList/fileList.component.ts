@@ -19,7 +19,6 @@ export class FileListComponent implements OnInit {
     private keys: string[];
 
     public constructor(){
-        console.log('criado')
     }
 
     private filesByProperty( prop: string): any {
